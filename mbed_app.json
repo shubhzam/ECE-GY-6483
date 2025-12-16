@@ -1,0 +1,12 @@
+{
+    "target_overrides": {
+        "*": {
+            "platform.stdio-baud-rate": 115200,
+            "platform.default-serial-baud-rate": 115200,
+            "events.shared-stacksize": 2048
+        },
+        "DISCO_L475VG_IOT01A": {
+            "target.features_add": ["BLE"]
+        }
+    }
+}

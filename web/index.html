@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PD Detector (BLE)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header__title">
+      <h1>PD Detector</h1>
+      <p class="muted">Web Bluetooth dashboard (BLE)</p>
+    </div>
+    <div class="header__actions">
+      <button id="btnConnect" class="btn btn--primary">Connect</button>
+      <button id="btnDisconnect" class="btn" disabled>Disconnect</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <div class="row">
+        <div>
+          <div class="label">Status</div>
+          <div id="status" class="status">Disconnected</div>
+        </div>
+        <div>
+          <div class="label">Device</div>
+          <div id="deviceName" class="mono muted">—</div>
+        </div>
+        <div>
+          <div class="label">Last update</div>
+          <div id="lastUpdate" class="mono muted">—</div>
+        </div>
+      </div>
+
+      <div class="note" id="compatNote" hidden>
+        <strong>Web Bluetooth not available.</strong>
+        <div class="muted">Use Chrome/Edge on desktop (or Chrome on Android). iPhone Safari typically can’t connect to BLE from a normal webpage.</div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card" id="cardTremor">
+        <div class="card__header">
+          <h2>Tremor</h2>
+          <span id="tremorDetected" class="pill pill--neutral">—</span>
+        </div>
+        <div class="kv">
+          <div class="k">Intensity</div>
+          <div class="v">
+            <div class="v__row">
+              <span id="tremorIntensity">—</span>
+              <span class="muted small mono" id="tremorIntensityPct"> </span>
+            </div>
+            <div class="bar" aria-hidden="true"><div id="tremorIntensityBar" class="bar__fill" style="width:0%"></div></div>
+          </div>
+          <div class="k">Frequency</div>
+          <div class="v">
+            <div id="tremorFreq">—</div>
+            <canvas id="tremorFreqPlot" class="plot" width="640" height="80"></canvas>
+            <div class="muted small">Recent frequency (Hz)</div>
+          </div>
+          <div class="k">Power</div><div id="tremorPower" class="v">—</div>
+        </div>
+      </article>
+
+      <article class="card" id="cardDysk">
+        <div class="card__header">
+          <h2>Dyskinesia</h2>
+          <span id="dyskDetected" class="pill pill--neutral">—</span>
+        </div>
+        <div class="kv">
+          <div class="k">Intensity</div>
+          <div class="v">
+            <div class="v__row">
+              <span id="dyskIntensity">—</span>
+              <span class="muted small mono" id="dyskIntensityPct"> </span>
+            </div>
+            <div class="bar" aria-hidden="true"><div id="dyskIntensityBar" class="bar__fill" style="width:0%"></div></div>
+          </div>
+          <div class="k">Frequency</div>
+          <div class="v">
+            <div id="dyskFreq">—</div>
+            <canvas id="dyskFreqPlot" class="plot" width="640" height="80"></canvas>
+            <div class="muted small">Recent frequency (Hz)</div>
+          </div>
+          <div class="k">Power</div><div id="dyskPower" class="v">—</div>
+        </div>
+      </article>
+
+      <article class="card" id="cardFog">
+        <div class="card__header">
+          <h2>FOG</h2>
+          <span id="fogDetected" class="pill pill--neutral">—</span>
+        </div>
+        <div class="kv">
+          <div class="k">Intensity</div>
+          <div class="v">
+            <div class="v__row">
+              <span id="fogIntensity">—</span>
+              <span class="muted small mono" id="fogIntensityPct"> </span>
+            </div>
+            <div class="bar" aria-hidden="true"><div id="fogIntensityBar" class="bar__fill" style="width:0%"></div></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Log</h2>
+        <div class="muted small">Connection + notification events</div>
+        <pre id="log" class="log" aria-live="polite"></pre>
+      </article>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
