@@ -45,8 +45,5 @@ RTES Project/
 3. Use PlatformIO to build and upload firmware.
 4. Open web/index.html in a browser for the web interface.
 
-## Authors
-- Shubham Mojidra
-
 ## License
 MIT License
